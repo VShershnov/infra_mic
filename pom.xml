@@ -36,7 +36,10 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 		<!-- Java 9 and later support -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -105,6 +108,9 @@
 		<module>consul</module>
 		<module>monolith</module>
 		<module>vault</module>
+		<module>book</module>
+		<module>delivery</module>
+		<module>order</module>
 	</modules>
 
 </project>
