@@ -111,6 +111,7 @@
 		<module>book</module>
 		<module>delivery</module>
 		<module>order</module>
+		<module>statistics</module>
 	</modules>
 
 </project>

@@ -17,6 +17,6 @@ public class Person {
 	
 	private LocalDate birthDate;
 	
-	private List<Hit> hits; 
+	private int hitCount;
 
 }

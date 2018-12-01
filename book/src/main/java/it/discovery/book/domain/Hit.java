@@ -2,6 +2,8 @@ package it.discovery.book.domain;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class Hit {
     private String userName;
@@ -10,7 +12,7 @@ public class Hit {
 
     private String browser;
 
-    //private LocalDateTime viewed;
+    private LocalDateTime viewed;
 
     private String applicationName;
 

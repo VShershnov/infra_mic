@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -37,9 +38,14 @@ public class BookController {
         Book book = bookRepository.findBookById(id);
         if (book != null) {
             addHit(book);
-           // book.setHitCount(getHitCount(book));
+           book.setHitCount(getHitCount(book));
         }
         return book;
+    }
+
+    private int getHitCount(Book book) {
+        //TODO implement
+        return 0;
     }
 
     @GetMapping("book")
@@ -61,7 +67,7 @@ public class BookController {
             e.printStackTrace();
         }
         hit.setUserName(System.getProperty("user.name"));
-        //hit.setViewed(LocalDateTime.now());
+        hit.setViewed(LocalDateTime.now());
         hit.setApplicationName("Library client");
         hit.setObjectId(String.valueOf(book.getId()));
     }
