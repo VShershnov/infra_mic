@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.it.discovery.monolith.domain.Order;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class InMemoryOrderRepository implements OrderRepository{
 
 	private final Map<Integer, Order> orders = new HashMap<>();

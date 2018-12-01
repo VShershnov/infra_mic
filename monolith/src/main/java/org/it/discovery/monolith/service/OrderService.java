@@ -2,21 +2,25 @@ package org.it.discovery.monolith.service;
 
 import java.time.LocalDateTime;
 
+import lombok.RequiredArgsConstructor;
 import org.it.discovery.monolith.domain.Order;
 import org.it.discovery.monolith.domain.OrderItem;
 import org.it.discovery.monolith.repository.BookRepository;
 import org.it.discovery.monolith.repository.CustomerRepository;
 import org.it.discovery.monolith.repository.OrderRepository;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class OrderService {
 
-	private OrderRepository orderRepository;
+	private final OrderRepository orderRepository;
 
-	private BookRepository bookRepository;
+	private final BookRepository bookRepository;
 
-	private DeliveryService deliveryService;
+	private final DeliveryService deliveryService;
 	
-	private CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
 	public void deliver(int orderId) {
 		Order order = orderRepository.findById(orderId);
