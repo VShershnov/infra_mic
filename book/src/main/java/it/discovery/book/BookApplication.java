@@ -9,5 +9,10 @@ public class BookApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookApplication.class, args);
     }
-
+//
+//    @Bean
+//    @Profile("dev")
+//    public InMemoryBookRepository repository() {
+//        return null;
+//    }
 }

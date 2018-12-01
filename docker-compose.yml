@@ -1,6 +1,16 @@
 version: '3.6'
 
 services:
+  book:
+    expose:
+      - 8090
+    build:
+      context: book
+      dockerfile: book.dockerfile
+    ports:
+      - "8090:8090"
+    networks:
+      - network1
   config-server:
     expose:
         - 9000

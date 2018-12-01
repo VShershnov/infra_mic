@@ -5,6 +5,7 @@ import it.discovery.book.domain.Hit;
 import it.discovery.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class BookController {
 
     private final BookRepository bookRepository;
 
-    //@Value("${library.name}")
+    @Value("${library.name}")
     private String libraryName;
 
     @GetMapping("/library")
