@@ -5,3 +5,6 @@ spring:
         git:
           uri: 
           searchPaths: 
+
+server:
+  port: 9000
