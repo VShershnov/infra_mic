@@ -9,8 +9,12 @@ services:
       dockerfile: book.dockerfile
     ports:
       - "8090:8090"
+    environment:
+      - CONFIG_SERVER_ADDRESS=config-server:9000
     networks:
       - network1
+    depends_on:
+      - "config-server"
   config-server:
     expose:
         - 9000

@@ -3,4 +3,4 @@ spring:
     name: library-client
   cloud:
     config:
-      uri: http://localhost:9000
+      uri: http://${CONFIG_SERVER_ADDRESS:http://localhost:9000}
