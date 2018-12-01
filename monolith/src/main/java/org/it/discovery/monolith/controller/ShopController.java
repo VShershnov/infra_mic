@@ -1,12 +1,12 @@
 package org.it.discovery.monolith.controller;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.it.discovery.monolith.domain.Book;
 import org.it.discovery.monolith.repository.BookRepository;
 import org.it.discovery.monolith.service.OrderService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("shop")
@@ -40,7 +40,7 @@ public class ShopController {
 	}
 
 	@PutMapping("book/{id}")
-	public void updateBook(@RequestBody Book book) {
+	public void updateBook(@PathVariable int id, @RequestBody Book book) {
 		bookRepository.saveBook(book);				
 	}
 	
