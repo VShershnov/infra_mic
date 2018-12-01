@@ -3,8 +3,8 @@ spring:
     config:
       server:
         git:
-          uri: 
-          searchPaths: 
+          uri: https://github.com/it-discovery/microservices
+          searchPaths: config
 
 server:
   port: 9000
