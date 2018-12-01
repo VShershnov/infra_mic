@@ -1,2 +1,6 @@
 server:
   port: 8090
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_ADDRESS:localhost:8070}

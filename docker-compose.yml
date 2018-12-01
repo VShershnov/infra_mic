@@ -11,10 +11,12 @@ services:
       - "8090:8090"
     environment:
       - CONFIG_SERVER_ADDRESS=config-server:9000
+      - EUREKA_ADDRESS=eureka-server:8070
     networks:
       - network1
     depends_on:
       - "config-server"
+      - "eureka-server"
   config-server:
     expose:
         - 9000
@@ -25,6 +27,16 @@ services:
       - "9000:9000"
     networks:
        - network1
+  eureka-server:
+    expose:
+      - 8070
+    build:
+      context: eureka-server
+      dockerfile: eureka.dockerfile
+    ports:
+      - "8070:8070"
+    networks:
+      - network1
 networks:
   network1:
     driver: bridge
