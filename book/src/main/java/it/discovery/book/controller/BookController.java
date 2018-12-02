@@ -1,14 +1,13 @@
 package it.discovery.book.controller;
 
+import it.discovery.book.client.StatisticsClient;
 import it.discovery.book.domain.Book;
 import it.discovery.book.domain.Hit;
 import it.discovery.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -23,7 +22,7 @@ public class BookController {
 
     private final BookRepository bookRepository;
 
-    private final RestTemplate restTemplate;
+    private final StatisticsClient statisticsClient;
 
     //@Value("${library.name}")
     private String libraryName;
@@ -49,8 +48,7 @@ public class BookController {
     }
 
     private int getHitCount(Book book) {
-        return restTemplate.getForObject("http://statistics/hit/" + book.getId(),
-                Integer.class);
+        return statisticsClient.getHitCount(book.getId());
     }
 
     @GetMapping
@@ -77,6 +75,6 @@ public class BookController {
         hit.setObjectId(String.valueOf(book.getId()));
 
 
-        restTemplate.postForObject("http://statistics/hit", hit, ResponseEntity.class);
+        statisticsClient.saveHit(hit);
     }
 }
