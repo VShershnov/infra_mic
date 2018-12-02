@@ -54,6 +54,20 @@ services:
       - "8070:8070"
     networks:
       - network1
+  zuul:
+    expose:
+      - 9100
+    build:
+      context: zuul
+      dockerfile: zuul.dockerfile
+    ports:
+      - "9100:9100"
+    environment:
+      - EUREKA_ADDRESS=eureka-server:8070
+    networks:
+      - network1
+    depends_on:
+      - "eureka-server"
 networks:
   network1:
     driver: bridge
