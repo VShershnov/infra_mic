@@ -1,7 +1,11 @@
 spring:
   cloud:
     consul:
-      host: localhost
+      host: ${CONSUL_HOST}
       port: 8500
+      discovery:
+        port: 8801
   application:
     name: consul-app
+server:
+  port: 8801
