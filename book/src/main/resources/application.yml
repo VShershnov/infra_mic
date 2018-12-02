@@ -1,8 +1,8 @@
 server:
   port: 8090
-statistics:
-  ribbon:
-    eureka:
-      enabled: false
-    listOfServers: localhost:9010,localhost:9020
-    ServerListRefreshInterval: 3000
+#statistics:
+#  ribbon:
+#    eureka:
+#      enabled: false
+#    listOfServers: localhost:9010,localhost:9020
+#    ServerListRefreshInterval: 3000
