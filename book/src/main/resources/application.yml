@@ -6,3 +6,8 @@ server:
 #      enabled: false
 #    listOfServers: localhost:9010,localhost:9020
 #    ServerListRefreshInterval: 3000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,info,health

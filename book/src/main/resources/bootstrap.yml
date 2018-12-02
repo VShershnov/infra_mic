@@ -1,11 +1,11 @@
 spring:
   application:
     name: library-client
-#  cloud:
-#    config:
-#      discovery:
-#        service-id: config-service
-#        enabled: true
+  cloud:
+    config:
+      discovery:
+        service-id: config-service
+        enabled: true
 eureka:
   client:
     serviceUrl:
