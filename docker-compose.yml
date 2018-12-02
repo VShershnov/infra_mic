@@ -11,6 +11,7 @@ services:
       - "8090:8090"
     environment:
       - EUREKA_ADDRESS=eureka-server:8070
+      - ZIPKIN_ADDRESS=zipkin:9411
     networks:
       - network1
     depends_on:
@@ -26,13 +27,14 @@ services:
       - "9010:9010"
     environment:
       - EUREKA_ADDRESS=eureka-server:8070
+      - ZIPKIN_ADDRESS=zipkin:9411
     networks:
       - network1
     depends_on:
       - "eureka-server"
   config-server:
     expose:
-        - 9000
+      - 9000
     build:
       context: config-server
       dockerfile: server.dockerfile
@@ -41,7 +43,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-       - network1
+      - network1
     depends_on:
       - "eureka-server"
   eureka-server:
@@ -68,6 +70,14 @@ services:
       - network1
     depends_on:
       - "eureka-server"
+  zipkin:
+    image: openzipkin/zipkin
+    expose:
+      - 9411
+    ports:
+      - "9411:9411"
+    networks:
+      - network1
 networks:
   network1:
     driver: bridge

@@ -7,3 +7,5 @@ eureka:
 spring:
   application:
     name: statistics
+  zipkin:
+    base-url: http://{ZIPKIN_ADDRESS:localhost:9411}
