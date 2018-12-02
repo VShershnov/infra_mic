@@ -16,6 +16,20 @@ services:
     depends_on:
       - "config-server"
       - "eureka-server"
+  statistics:
+    expose:
+      - 9010
+    build:
+      context: statistics
+      dockerfile: statistics.dockerfile
+    ports:
+      - "9010:9010"
+    environment:
+      - EUREKA_ADDRESS=eureka-server:8070
+    networks:
+      - network1
+    depends_on:
+      - "eureka-server"
   config-server:
     expose:
         - 9000

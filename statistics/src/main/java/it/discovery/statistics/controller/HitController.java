@@ -19,6 +19,6 @@ public class HitController {
 
     @PostMapping
     public void saveHit(@RequestBody Hit hit) {
-
+        hitRepository.saveHit(hit);
     }
 }

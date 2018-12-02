@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,6 +23,8 @@ import java.util.List;
 public class BookController {
 
     private final BookRepository bookRepository;
+
+    private final RestTemplate restTemplate;
 
     @Value("${library.name}")
     private String libraryName;
@@ -40,14 +44,14 @@ public class BookController {
         Book book = bookRepository.findBookById(id);
         if (book != null) {
             addHit(book);
-           book.setHitCount(getHitCount(book));
+            book.setHitCount(getHitCount(book));
         }
         return book;
     }
 
     private int getHitCount(Book book) {
-        //TODO implement
-        return 0;
+        return restTemplate.getForObject("http://statistics/hit/" + book.getId(),
+                Integer.class);
     }
 
     @GetMapping("book")
@@ -72,5 +76,8 @@ public class BookController {
         hit.setViewed(LocalDateTime.now());
         hit.setApplicationName("Library client");
         hit.setObjectId(String.valueOf(book.getId()));
+
+
+        restTemplate.postForObject("http://statistics/hit", hit, ResponseEntity.class);
     }
 }
