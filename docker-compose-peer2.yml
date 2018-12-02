@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  eureka-server2:
+    expose:
+      - 8071
+    ports:
+      - "8071:8071"
+    environment:
+      - EUREKA_ADDRESS=http://eureka-server:8070/eureka/,http://eureka-server2:8071/eureka/
+      - SERVER_PORT=8071
+    build:
+      context: eureka-server
+      dockerfile: eureka.dockerfile
+    networks:
+      - network1
+  eureka-server:
+    environment:
+      - EUREKA_ADDRESS=http://eureka-server2:8071/eureka/,http://eureka-server:8070/eureka/
+      - SERVER_PORT=8070
