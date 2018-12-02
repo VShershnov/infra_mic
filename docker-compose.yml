@@ -12,6 +12,7 @@ services:
     environment:
       - EUREKA_ADDRESS=eureka-server:8070
       - ZIPKIN_ADDRESS=zipkin:9411
+      - CONSUL_HOST=consul-server
     networks:
       - network1
     depends_on:
@@ -76,6 +77,16 @@ services:
       - 9411
     ports:
       - "9411:9411"
+    networks:
+      - network1
+  consul-server:
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+    command: "agent -server -bootstrap-expect 1 -ui -client 0.0.0.0"
+    image: consul
     networks:
       - network1
 networks:

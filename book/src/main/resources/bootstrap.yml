@@ -2,11 +2,18 @@ spring:
   application:
     name: library-client
   cloud:
-    config:
-      discovery:
-        service-id: config-service
-        enabled: true
+    consul:
+      config:
+        prefix: config
+        default-context: application
+      host: ${CONSUL_HOST}
+      port: 8500
+#  cloud:
+#    config:
+#      discovery:
+#        service-id: config-service
+#        enabled: true
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${EUREKA_ADDRESS:localhost:8070}/eureka
+      defaultZone: http://${EUREKA_ADDRESS:localhost:8070}/eurekacon
