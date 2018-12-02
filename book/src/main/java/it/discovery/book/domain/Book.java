@@ -14,5 +14,5 @@ public class Book {
 
     private double price;
 
-    private int hitCount;
+    private String hitCount;
 }

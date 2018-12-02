@@ -1,5 +1,7 @@
 package it.discovery.book.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import it.discovery.book.client.StatisticsClient;
 import it.discovery.book.domain.Book;
 import it.discovery.book.domain.Hit;
@@ -38,6 +40,9 @@ public class BookController {
     }
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @HystrixCommand(fallbackMethod = "getDefaultBook"
+            , commandProperties =
+    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "5"))
     public Book findById(@PathVariable int id) {
         Book book = bookRepository.findBookById(id);
         if (book != null) {
@@ -47,8 +52,17 @@ public class BookController {
         return book;
     }
 
-    private int getHitCount(Book book) {
-        return statisticsClient.getHitCount(book.getId());
+    public String getHitCount(Book book) {
+        return String.valueOf(statisticsClient.getHitCount(book.getId()));
+    }
+
+    public Book getDefaultBook(int id, Throwable ex) {
+        log.error(ex.getMessage(), ex);
+        Book book = bookRepository.findBookById(id);
+        if (book != null) {
+            book.setHitCount("N/A");
+        }
+        return book;
     }
 
     @GetMapping
@@ -73,7 +87,6 @@ public class BookController {
         hit.setViewed(LocalDateTime.now());
         hit.setApplicationName("Library client");
         hit.setObjectId(String.valueOf(book.getId()));
-
 
         statisticsClient.saveHit(hit);
     }
