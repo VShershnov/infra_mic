@@ -5,7 +5,6 @@ import it.discovery.book.domain.Hit;
 import it.discovery.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class BookController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${library.name}")
+    //@Value("${library.name}")
     private String libraryName;
 
     @GetMapping("/library")
@@ -39,7 +38,7 @@ public class BookController {
         bookRepository.saveBook(book);
     }
 
-    @GetMapping(path = "book/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Book findById(@PathVariable int id) {
         Book book = bookRepository.findBookById(id);
         if (book != null) {
@@ -54,12 +53,12 @@ public class BookController {
                 Integer.class);
     }
 
-    @GetMapping("book")
+    @GetMapping
     public List<Book> getBooks() {
         return bookRepository.getBooks();
     }
 
-    @PutMapping("book/{id}")
+    @PutMapping("{id}")
     public void updateBook(@PathVariable int id, @RequestBody Book book) {
         bookRepository.saveBook(book);
     }

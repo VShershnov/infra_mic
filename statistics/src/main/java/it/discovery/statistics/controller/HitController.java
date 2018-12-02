@@ -12,7 +12,7 @@ public class HitController {
 
     private final HitRepository hitRepository;
 
-    @GetMapping("/{entityId}")
+    @GetMapping("/{objectId}")
     public int getHitCount(@PathVariable String objectId) {
         return hitRepository.getHitCount(objectId);
     }

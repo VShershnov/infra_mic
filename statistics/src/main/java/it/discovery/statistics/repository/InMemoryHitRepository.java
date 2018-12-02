@@ -7,16 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class InMemoryHitRepository implements HitRepository {
-    private Map<String, List<Hit>> hits;
-
+    private Map<String, List<Hit>> hits = new ConcurrentHashMap<>();
 
     @Override
     public int getHitCount(String objectId) {
         return hits.getOrDefault(objectId, Collections.emptyList()).size();
-
     }
 
     @Override
