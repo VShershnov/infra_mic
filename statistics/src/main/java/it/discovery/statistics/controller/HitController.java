@@ -17,6 +17,11 @@ public class HitController {
         return hitRepository.getHitCount(objectId);
     }
 
+    @GetMapping
+    public int getHits() {
+        return 0;
+    }
+
     @PostMapping
     public void saveHit(@RequestBody Hit hit) {
         hitRepository.saveHit(hit);
