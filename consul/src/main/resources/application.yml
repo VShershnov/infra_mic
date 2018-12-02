@@ -5,6 +5,9 @@ spring:
       port: 8500
       discovery:
         port: 8801
+      config:
+        watch:
+          wait-time: 60
   application:
     name: consul-app
 server:

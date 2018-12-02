@@ -35,7 +35,7 @@ services:
     environment:
       - CONSUL_HOST=consul-server-bootstrap
     networks:
-      - network1
+      - consul-network
     depends_on:
       - "consul-server-bootstrap"
 networks:
