@@ -13,4 +13,4 @@ management:
         include: hystrix.stream,info,health
 spring:
   zipkin:
-    base-url: http://{ZIPKIN_ADDRESS:localhost:9411}
+    base-url: http://${ZIPKIN_ADDRESS:localhost:9411}
